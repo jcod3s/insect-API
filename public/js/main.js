@@ -2,5 +2,5 @@ const getData = document.querySelector('#getData');
 const insect = document.querySelector('#insect')
 
 getData.addEventListener('click', function() {
-    fetch(`localhost:8000/api?=${insect}`)
+    fetch(`https://murmuring-forest-20754.herokuapp.com/api?=${insect}`)
 })
