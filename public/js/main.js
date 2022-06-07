@@ -5,7 +5,7 @@ getData.addEventListener('click', function() {
     console.log('fetching data')
 
   const insect = document.querySelector('#insect').value
-  const url = `https://murmuring-forest-20754.herokuapp.com/api/${insect}`
+  const url = `https://insect-api.herokuapp.com/api/${insect}`
 
   fetch(url)
       .then(res => res.json()) // parse response as JSON
