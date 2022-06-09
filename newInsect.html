@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="A simple API that returns insect data based on search parameters">
+    	<meta name="keywords" content="insects, API, insect database, dominican republic insects, dominican spiders">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+		<title>Add New Insect</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="shortcut icon" href="#">
+	</head>
+	<body>
+
+		<h1>Caribbean Insect DataBase</h1>
+		<form id="insectInfo" action="/addInsect" method="POST">
+            <input id="commonName" type="text" placeholder="Common Name" name="commonName">
+            <input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
+            <input id="order" type="text" placeholder="Order" name="order">
+            <input id="lifeSpan" type="text" placeholder="Approx. Life Span" name="lifeSpan">
+            <input id="description" type="text" placeholder="Description" name="description">
+            <button type="submit">Submit</button>
+        </form>
+
+        
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
+                <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
+            </div>
+            <div class="preview">
+                <p>No files currently selected for upload</p>
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </form>
+              
+		<script type="text/javascript" src="/js/newInsect.js"></script>
+	</body>
+</html>
