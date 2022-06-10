@@ -41,6 +41,11 @@ app.get('/',(req,res) => {
     res.sendFile(__dirname+'/index.html')
 })
 
+//direct user to add insect HTML page
+app.get('/api/addInsect',(req,res)=> {
+    res.sendFile(__dirname+'/newInsect.html')
+})
+
 
 app.get('/api/:insectName',(req,res)=> {
     const insectName = req.params.insectName.toLowerCase();
@@ -52,8 +57,9 @@ app.get('/api/:insectName',(req,res)=> {
     //res.json(insects);
 })
 
-app.post('/addInsectData',(req,res)=> {
-    console.log('new insect added')
+//submits new insect data to DB
+app.post('/api/addInsectData',(req,res)=> {
+    console.log('new insect added to DB')
 })
 
 app.listen(process.env.PORT || PORT, (req,res)=> {
