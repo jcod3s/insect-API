@@ -1,12 +1,5 @@
 const getData = document.querySelector('#getData');
 const insectName = document.querySelector('#insect')
-const newInsect = document.querySelector('#newInsectNav');
-
-newInsect.addEventListener('click', function(){
-    const url = `https://insect-api.herokuapp.com/api/addInsect`
-
-    fetch(url)
-})
 
 getData.addEventListener('click', function() {
     console.log('fetching data')
