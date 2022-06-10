@@ -1,10 +1,7 @@
-const insectData = document.querySelector('#submitInsectData');
-const insectImg = document.querySelector('#submitInsectImg');
+const newInsect = document.querySelector('#newInsectNav');
 
-insectData.addEventListener('click',function() {
+newInsect.addEventListener('click', function(){
+    const url = `https://insect-api.herokuapp.com/api/addInsect`
 
-})
-
-insectImg.addEventListener('click',function() {
-
+    fetch(url)
 })
