@@ -16,17 +16,17 @@
 	<body>
 
 		<h1>Caribbean Insect DataBase</h1>
-		<form id="insectInfo" action="/addInsect" method="POST">
+		<form id="insectInfo" action="/addInsectData" method="POST">
             <input id="commonName" type="text" placeholder="Common Name" name="commonName">
             <input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
             <input id="order" type="text" placeholder="Order" name="order">
             <input id="lifeSpan" type="text" placeholder="Approx. Life Span" name="lifeSpan">
             <input id="description" type="text" placeholder="Description" name="description">
-            <button type="submit">Submit</button>
+            <button id="submitInsectData" type="submit">Submit</button>
         </form>
 
         
-        <form method="post" enctype="multipart/form-data">
+        <form id="insectImages" action="/addInsectImg" method="post" enctype="multipart/form-data">
             <div>
                 <label for="image_uploads">Choose images to upload (PNG, JPG)</label>
                 <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" multiple>
@@ -35,7 +35,7 @@
                 <p>No files currently selected for upload</p>
             </div>
             <div>
-                <button>Submit</button>
+                <button id="submitInsectImg">Submit</button>
             </div>
         </form>
               

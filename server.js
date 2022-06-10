@@ -52,6 +52,10 @@ app.get('/api/:insectName',(req,res)=> {
     //res.json(insects);
 })
 
+app.post('/addInsectData',(req,res)=> {
+    console.log('new insect added')
+})
+
 app.listen(process.env.PORT || PORT, (req,res)=> {
     console.log(`server is running on port ${PORT}`)
 })
