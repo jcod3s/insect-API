@@ -41,11 +41,6 @@ app.get('/',(req,res) => {
     res.sendFile(__dirname+'/index.html')
 })
 
-//direct user to add insect HTML page
-app.get('/api/addInsect',(req,res)=> {
-    res.sendFile(__dirname+'/newInsect.html')
-})
-
 
 app.get('/api/:insectName',(req,res)=> {
     const insectName = req.params.insectName.toLowerCase();
