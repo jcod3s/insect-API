@@ -1,5 +1,11 @@
+//pull data from obect
 const getData = document.querySelector('#getData');
+
+//insect search bar
 const insectName = document.querySelector('#insect')
+
+//submit new insect data
+const submitInsectData = document.querySelector('#submitInsectData')
 
 getData.addEventListener('click', function() {
     console.log('fetching data')
@@ -22,4 +28,8 @@ getData.addEventListener('click', function() {
       .catch(err => {
           console.log(`error ${err}`)
       });
+})
+
+submitInsectData.addEventListener('click',function(){
+  console,log('insect data added')
 })

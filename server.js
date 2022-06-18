@@ -53,7 +53,7 @@ app.get('/api/:insectName',(req,res)=> {
 })
 
 //submits new insect data to DB
-app.post('/api/addInsectData',(req,res)=> {
+app.post('/api/submitInsectData',(req,res)=> {
     console.log('new insect added to DB')
 })
 
