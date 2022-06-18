@@ -31,5 +31,5 @@ getData.addEventListener('click', function() {
 })
 
 submitInsectData.addEventListener('click',function(){
-  console,log('insect data added')
+  console.log('insect data added')
 })
