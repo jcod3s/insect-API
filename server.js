@@ -1,10 +1,37 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
+const MongoClient = require('mongodb').MongoClient
+const connectionString = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
 const cors = require('cors')
 const PORT = 8000;
 
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true}))
 app.use(cors())
+
+MongoClient.connect(connectionString,{ useUnifiedTopology: true })
+    .then(client => {
+        console.log('connected to database')
+
+        const db = client.db('insectDb')
+        const insectDataCollection = db.collection('insectData')
+
+        //app.use(/* ... */)
+        //app.get(/* ... */)
+        app.post('/api/submitInsectData',(req,res)=> {
+            insectDataCollection.insertOne(req.body)
+            .then(result => {
+                console.log(result)
+            })
+            .catch(error => console.error(error))
+        })
+        //app.listen(/* ... */)
+    })
+    .catch(error => {
+        console.error(error)
+    })
+
 
 const insects = {
     'mantis': {
@@ -54,7 +81,7 @@ app.get('/api/:insectName',(req,res)=> {
 
 //submits new insect data to DB
 app.post('/api/submitInsectData',(req,res)=> {
-    console.log('new insect added to DB')
+    console.log(req.body)
 })
 
 app.listen(process.env.PORT || PORT, (req,res)=> {

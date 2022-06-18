@@ -29,7 +29,3 @@ getData.addEventListener('click', function() {
           console.log(`error ${err}`)
       });
 })
-
-submitInsectData.addEventListener('click',function(){
-  console.log('insect data added')
-})
