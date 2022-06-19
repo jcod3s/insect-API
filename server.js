@@ -1,14 +1,17 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-const MongoClient = require('mongodb').MongoClient
-const connectionString = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
+
 const cors = require('cors')
 const PORT = 8000;
 
 app.use(express.static('public'))
-app.use(bodyParser.urlencoded({ extended: true}))
+
 app.use(cors())
+
+//Mongo Declarations
+const MongoClient = require('mongodb').MongoClient
+const connectionString = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
 
 MongoClient.connect(connectionString,{ useUnifiedTopology: true })
     .then(client => {
@@ -16,17 +19,44 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
 
         const db = client.db('insectDb')
         const insectDataCollection = db.collection('insectData')
+        
+        app.set('view engine','ejs')
 
-        //app.use(/* ... */)
-        //app.get(/* ... */)
+        app.use(bodyParser.urlencoded({ extended: true}))
+
+        app.get('/',(req,res) => {
+            db.collection('insectData').find().toArray()
+                .then(results => {
+                    res.render('index.ejs',{ insects: results})
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+        })
+
+        app.get('/api/:insectName',(req,res)=> {
+            const insectName = req.params.insectName.toLowerCase();
+            if (insects[insectName]){
+                res.json(insects[insectName])
+            } else {
+                res.json(insects['unknown'])
+            }
+            //res.json(insects);
+        })
+
+        //submits new insect data to DB
         app.post('/api/submitInsectData',(req,res)=> {
             insectDataCollection.insertOne(req.body)
             .then(result => {
-                console.log(result)
+                res.redirect('/')
             })
             .catch(error => console.error(error))
         })
-        //app.listen(/* ... */)
+
+        app.listen(process.env.PORT || PORT, (req,res)=> {
+            console.log(`server is running on port ${PORT}`)
+        })
+
     })
     .catch(error => {
         console.error(error)
@@ -63,27 +93,3 @@ const insects = {
         'description': 'unknown'
     }
 }
-
-app.get('/',(req,res) => {
-    res.sendFile(__dirname+'/index.html')
-})
-
-
-app.get('/api/:insectName',(req,res)=> {
-    const insectName = req.params.insectName.toLowerCase();
-    if (insects[insectName]){
-        res.json(insects[insectName])
-    } else {
-        res.json(insects['unknown'])
-    }
-    //res.json(insects);
-})
-
-//submits new insect data to DB
-app.post('/api/submitInsectData',(req,res)=> {
-    console.log(req.body)
-})
-
-app.listen(process.env.PORT || PORT, (req,res)=> {
-    console.log(`server is running on port ${PORT}`)
-})
