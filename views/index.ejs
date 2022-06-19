@@ -18,13 +18,9 @@
 	<body>
 
 		<h1>Caribbean Insect DataBase</h1>
+        <h2>Search Insect DB</h2>
 		<input id="insect" type="text" name="" value="">
 		<button id="getData" type="button" name="button">Get Data</button>
-
-		<h2 id="commonName"></h2>
-		<section id="imageCarosel">
-
-		</section>
 
 		<h3 id="sciName"></h3>
 		<span id="order"></span>
@@ -33,6 +29,7 @@
 		<h3 id="descHeader"></h3>
 		
 		<section id="description">
+            <h2>Add New Insect</h2>
 			<form id="insectInfo" action="/api/submitInsectData" method="POST">
 				<input id="commonName" type="text" placeholder="Common Name" name="commonName">
 				<input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
