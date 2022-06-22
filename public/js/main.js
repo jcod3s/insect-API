@@ -3,8 +3,8 @@ const getData = document.querySelector('#getData');
 
 getData.addEventListener('click', function() {
 
-  const insect = document.querySelector('#insect').value
-  const url = `https://insect-api.herokuapp.com/api/${insect}`
+  const insect = document.querySelector('#insect').value.toLowerCase()
+  const url = `https://insect-api.herokuapp.com/api/search/${insect}`
 
   fetch(url)
       .then(res => res.json()) // parse response as JSON
