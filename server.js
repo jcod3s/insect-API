@@ -10,7 +10,7 @@ app.use(express.static('public'))
 app.use(cors())
 
 //Mongo Declarations
-const MongoClient = require('mongodb').MongoClient
+const { MongoClient, ObjectId} = require('mongodb')
 const connectionString = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
 
 MongoClient.connect(connectionString,{ useUnifiedTopology: true })
@@ -18,7 +18,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
         console.log('connected to database')
 
         const db = client.db('insectDb')
-        const insectDataCollection = db.collection('insectData')
+        const collection = db.collection('insectData')
         
         app.set('view engine','ejs')
 
@@ -34,12 +34,11 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
                 })
         })
 
-        app.get('/api/:insectName',(req,res)=> {
+        app.get('/api/:insectName',async (req,res)=> {
             insectName = insectName.toLowerCase();
-            
-            db.collection('insectData').find( { commonName: insectName} ).toArray()
-                .then(results => {
-                    res.render('index.ejs',{ insects: results})
+            let searchResults = await collection.find({ "commonName" : ObjectId(request.params.id)})
+                .then(result => {
+                    res.render('index.ejs',{ insects: result})
                 })
                 .catch(error => {
                     console.error(error)
@@ -48,7 +47,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
 
         //submits new insect data to DB
         app.post('/api/submitInsectData',(req,res)=> {
-            insectDataCollection.insertOne(req.body)
+            collection.insertOne(req.body)
             .then(result => {
                 res.redirect('/')
             })
