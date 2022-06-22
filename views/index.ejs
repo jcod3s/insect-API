@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="A simple API that returns insect data based on search parameters">
+    	<meta name="keywords" content="insects, API, insect database, dominican republic insects, dominican spiders">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+		<title>Insect API</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="shortcut icon" href="#">
+	</head>
+	<main>
+	</main>
+	
+	<body>
+
+		<h1>Caribbean Insect DataBase</h1>
+        <h2>Search Insect DB</h2>
+		<input id="insect" type="text" name="" value="">
+		<button id="getData" type="button" name="button">Get Data</button>
+
+		<h3 id="sciName"></h3>
+		<span id="order"></span>
+		<span id="lifeSpan"></span>
+		<span id="climates"></span>
+		<h3 id="descHeader"></h3>
+		
+		<section id="description">
+            <h2>Add New Insect</h2>
+			<form id="insectInfo" action="/api/submitInsectData" method="POST">
+				<input id="commonName" type="text" placeholder="Common Name" name="commonName">
+				<input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
+				<input id="order" type="text" placeholder="Order" name="order">
+				<input id="lifeSpan" type="text" placeholder="Approx. Life Span" name="lifeSpan">
+				<input id="description" type="text" placeholder="Description" name="description">
+				<button id="submitInsectData" type="submit">Submit</button>
+			</form>
+            <h2> Insects </h2>
+
+                <section class="insects">
+                    <!-- Loop through quotes -->
+                    <% for(var i = 0; i < insects.length; i++) {%>
+                        <div class="insect">
+                            <span><%= 'Common Name: ' + insects[i].commonName %></span>
+                            <span><%= 'Scientific Name '+ insects[i].sciName %></span>
+                            <span><%= 'Order: ' + insects[i].order %></span>
+                            <span><%= 'Avg. Lifespan: ' + insects[i].lifeSpan %></span>
+                            <span><%= 'Description: ' + insects[i].description %></span>
+                        </div>
+                    <% } %>
+                    </section>
+		</section>
+		
+
+		<script type="text/javascript" src="/js/main.js"></script>
+	</body>
+</html>
