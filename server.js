@@ -7,7 +7,7 @@ const PORT = 8000;
 
 app.use(express.static('public'))
 
-app.use(cors())
+
 
 //Mongo Declarations
 const { MongoClient, ObjectId} = require('mongodb')
@@ -23,6 +23,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
         app.set('view engine','ejs')
 
         app.use(bodyParser.urlencoded({ extended: true}))
+        app.use(cors())
 
         app.get('/',(req,res) => {
             db.collection('insectData').find().toArray()
