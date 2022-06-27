@@ -14,7 +14,7 @@ getData.addEventListener('click', function() {
   const url = `https://insect-api.herokuapp.com/api/${insect}`
 
   fetch(url)
-      .then(res => res.json()) // parse response as JSON
+      //.then(res => res.json()) // parse response as JSON
       .then(data => {
         const insectData = data
         document.querySelector('#sciName').textContent = 'Scientific Name: '+ insectData.scientificName
