@@ -42,7 +42,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             //     res.json(insectDataCollection['unknown'])
             // }
             // //res.json(insects);
-            db.collection('insectData').find( { commonName: insectName } )
+            db.collection('insectData').find( { commonName: insectName } ).toArray()
             .then(results => {
                 res.render('index.ejs', { insects: results })
               })
