@@ -34,7 +34,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
                 })
         })
 
-        app.get('/api/:insectName',(req,res)=> {
+        app.get('/api/:insectName',async (req,res)=> {
             const insectName = req.params.insectName.toLowerCase();
             // if (db.collection('insectData').find(insectName)){
             //     res.json(db.collection('insectData')[insectName])
@@ -42,7 +42,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             //     res.json(insectDataCollection['unknown'])
             // }
             // //res.json(insects);
-            insectDataCollection.find( { commonName: insectName } ).toArray()
+            const performSearch = await insectDataCollection.find( { commonName: insectName } ).toArray()
             .then(results => {
                 console.log(results)
                 res.render('index.ejs',{ insects: results })
