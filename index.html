@@ -18,8 +18,12 @@
 	<body>
 
 		<h1>Caribbean Insect DataBase</h1>
-		<input id="insect" type="text" name="" value="">
-		<button id="getData" type="button" name="button">Get Data</button>
+		
+
+		<form id="performSearch" action="/api/insectName" method="GET">
+			<input id="insect" type="text" name="insectName" value="">
+			<button id="getData" type="button" name="button">Get Data</button>
+		</form>
 
 		<h2 id="commonName"></h2>
 		<section id="imageCarosel">
