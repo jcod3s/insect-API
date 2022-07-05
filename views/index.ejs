@@ -19,9 +19,11 @@
 
 		<h1>Caribbean Insect DataBase</h1>
         <h2>Search Insect DB</h2>
-		<input id="insect" type="text" name="" value="">
-		<button id="getData" type="button" name="button">Get Data</button>
-
+		<form id="performSearch" action="/api/insectName" method="GET">
+			<input id="insect" type="text" name="insectName" value="">
+			<button id="getData" type="button" name="button">Get Data</button>
+		</form>
+		
 		<h3 id="sciName"></h3>
 		<span id="order"></span>
 		<span id="lifeSpan"></span>
