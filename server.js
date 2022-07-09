@@ -11,8 +11,9 @@ app.use(cors())
 
 //Mongo Declarations
 const MongoClient = require('mongodb').MongoClient
+const connectionString = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
 
-MongoClient.connect(process.env.DB_STRING,{ useUnifiedTopology: true })
+MongoClient.connect(connectionString,{ useUnifiedTopology: true })
     .then(client => {
         console.log('connected to database')
 
@@ -34,7 +35,7 @@ MongoClient.connect(process.env.DB_STRING,{ useUnifiedTopology: true })
         })
 
         app.get('/api/searchInsect/',async (req,res)=> {
-            let name = req.query.insectName.toLowerCase()
+            const { name } = req.query.insectName.toLowerCase();
             const performSearch = await insectDataCollection.find( { commonName: name } ).toArray()
             .then(results => {
                 res.render('index.ejs',{ insects: results })
