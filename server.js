@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser')
 
 const cors = require('cors')
+const env = require('dotenv').config()
 const PORT = 8000;
 
 app.use(express.static('public'))
@@ -11,8 +12,7 @@ app.use(cors())
 
 //Mongo Declarations
 const MongoClient = require('mongodb').MongoClient
-const connectionString = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
-
+const connectionString  = process.env.DB_STRING
 MongoClient.connect(connectionString,{ useUnifiedTopology: true })
     .then(client => {
         console.log('connected to database')
@@ -35,11 +35,10 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
         })
 
         app.get('/api/searchInsect/',async (req,res)=> {
-            const { name } = req.query.insectName.toLowerCase();
+            const name = req.query.insectName.toLowerCase();
             const performSearch = await insectDataCollection.find( { commonName: name } ).toArray()
             .then(results => {
                 res.render('index.ejs',{ insects: results })
-                console.log(`returned search for ${name}`)
             })
             .catch(error => {
                 console.error(error)
