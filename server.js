@@ -34,13 +34,12 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
                 })
         })
 
-        app.get('/api/insectName',async (req,res)=> {
-            const { insectName } = req.body.toLowerCase();
-            const performSearch = await insectDataCollection.find( { commonName: insectName } ).toArray()
+        app.get('/api/searchInsect/:name',async (req,res)=> {
+            const { name } = req.body.toLowerCase();
+            const performSearch = await insectDataCollection.find( { commonName: name } ).toArray()
             .then(results => {
-                console.log(results)
                 res.render('index.ejs',{ insects: results })
-              })
+            })
             .catch(error => {
                 console.error(error)
             })
