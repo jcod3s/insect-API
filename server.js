@@ -39,6 +39,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             const performSearch = await insectDataCollection.find( { commonName: name } ).toArray()
             .then(results => {
                 res.render('index.ejs',{ insects: results })
+                console.log(`returned search for ${name}`)
             })
             .catch(error => {
                 console.error(error)
