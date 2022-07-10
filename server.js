@@ -12,7 +12,7 @@ app.use(cors())
 
 //Mongo Declarations
 const MongoClient = require('mongodb').MongoClient
-const connectionString  = process.env.DB_STRING
+const connectionString  = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
 MongoClient.connect(connectionString,{ useUnifiedTopology: true })
     .then(client => {
         console.log('connected to database')
