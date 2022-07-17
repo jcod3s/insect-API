@@ -54,6 +54,11 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             .catch(error => console.error(error))
         })
 
+        //uploads images to db
+        app.post('/api/submitInsectImg',(req,res)=> {
+            res.send('img uploaded')
+        })
+
         app.listen(process.env.PORT || PORT, (req,res)=> {
             console.log(`server is running on port ${PORT}`)
         })

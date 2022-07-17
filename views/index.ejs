@@ -16,22 +16,46 @@
 	</main>
 	
 	<body>
+		<header class="container">
+			<a href="/">
+				<h1>Caribbean Insect DataBase</h1>	
+			</a>
+		</header>
+	
+        <section class="container">
+			<h2>Search Insect DB</h2>
+			<form id="performSearch" action="/api/searchInsect" method="GET">
+				<input type="text" id="insectName" name="insectName" value="">
+				<button>Get Data</button>
+			</form>
+		</section>
+		
+		<section id="description" class="container">
+            <h2> Insects </h2>
 
-		<h1>Caribbean Insect DataBase</h1>
-        <h2>Search Insect DB</h2>
-		<form id="performSearch" action="/api/searchInsect" method="GET">
-			<input type="text" id="insectName" name="insectName" value="">
-			<button>Get Data</button>
-		</form>
-		
-		<h3 id="sciName"></h3>
-		<span id="order"></span>
-		<span id="lifeSpan"></span>
-		<span id="climates"></span>
-		<h3 id="descHeader"></h3>
-		
-		<section id="description">
-            <h2>Add New Insect</h2>
+                <section class="insects">
+                    <!-- Loop through quotes -->
+                    <% for(var i = 0; i < insects.length; i++) {%>
+                        <div class="insect">
+							<div class="insectImgs">
+								<img class="smImgContainer" src="http://localhost:8000/temp-images/gh1.jpg" alt="insectImg">
+								<img class="smImgContainer" src="http://localhost:8000/temp-images/gh2.jpg" alt="insectImg">
+								<!-- will ebentually hold a corosel of imsect images -->
+							</div>
+                            <div class="insectData">
+								<span><%= 'Common Name: ' + insects[i].commonName %></span>
+								<span><%= 'Scientific Name '+ insects[i].sciName %></span>
+								<span><%= 'Order: ' + insects[i].order %></span>
+								<span><%= 'Avg. Lifespan: ' + insects[i].lifeSpan %></span>
+								<span><%= 'Description: ' + insects[i].description %></span>
+							</div>
+                        </div>
+                    <% } %>
+                </section>
+		</section>
+
+		<section class="container">
+			<h2>Add New Insect</h2>
 			<form id="insectInfo" action="/api/submitInsectData" method="POST">
 				<input id="commonName" type="text" placeholder="Common Name" name="commonName">
 				<input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
@@ -40,23 +64,8 @@
 				<input id="description" type="text" placeholder="Description" name="description">
 				<button id="submitInsectData" type="submit">Submit</button>
 			</form>
-            <h2> Insects </h2>
-
-                <section class="insects">
-                    <!-- Loop through quotes -->
-                    <% for(var i = 0; i < insects.length; i++) {%>
-                        <div class="insect">
-                            <span><%= 'Common Name: ' + insects[i].commonName %></span>
-                            <span><%= 'Scientific Name '+ insects[i].sciName %></span>
-                            <span><%= 'Order: ' + insects[i].order %></span>
-                            <span><%= 'Avg. Lifespan: ' + insects[i].lifeSpan %></span>
-                            <span><%= 'Description: ' + insects[i].description %></span>
-                        </div>
-                    <% } %>
-                </section>
 		</section>
 		
-
 		<script type="text/javascript" src="/js/main.js"></script>
 	</body>
 </html>
