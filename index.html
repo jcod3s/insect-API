@@ -56,17 +56,21 @@
 
 		<section class="container">
 			<h2>Add New Insect</h2>
+			<form id="insectImages" action="/api/submitInsectImages" enctype="multipart/form-data" method="POST">
+				<input id="image" type="file" name="uploadedFiles">
+				<input id="description" type="text" name="description">
+			</form>
 			<form id="insectInfo" action="/api/submitInsectData" method="POST">
 				<input id="commonName" type="text" placeholder="Common Name" name="commonName">
 				<input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
 				<input id="order" type="text" placeholder="Order" name="order">
 				<input id="lifeSpan" type="text" placeholder="Approx. Life Span" name="lifeSpan">
 				<input id="description" type="text" placeholder="Description" name="description">
-				<button id="submitInsectData" type="submit">Submit</button>
 			</form>
+			<button id="submitInsectData" type="submit">Add Insect</button>
 		</section>
 		
 
-		<script type="text/javascript" src="/js/main.js"></script>
+		<script type="module" src="/js/main.js"></script>
 	</body>
 </html>
