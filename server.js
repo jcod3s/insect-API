@@ -10,6 +10,7 @@ const multer  = require('multer');
 const { response } = require('express');
 const storage = multer.memoryStorage()
 const upload = multer({ dest: 'uploads/' })
+
 const { uploadFile } = require('./s3')
 
 app.use(express.static('public'))
@@ -78,12 +79,8 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             const path = file.path;
             
             const result = await uploadFile(file)
-            console.log(result)
-            
-            const imgLink = 'rustysautobody.com'
+            res.send({imgPath: `searchInsect/${result.Key}`})
 
-
-            
         })
 
         app.listen(process.env.PORT || PORT, (req,res)=> {

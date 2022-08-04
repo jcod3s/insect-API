@@ -1,13 +1,11 @@
 require ('dotenv').config()
-const S3 = require('aws-sdk/client/s3')
+const S3 = require('aws-sdk/clients/s3')
 const fs = require('fs')
 
-DB_STRING = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
-
-const awsBucketName = process.env.awsBucketName
-const awsBucketRegion = process.env.awsBucketRegion
-const awsAccessKey = process.env.awsAccessKey
-const awsSecretKey = process.env.awsSecretKey
+const awsBucketName = process.env.AWS_BUCKET_NAME
+const awsBucketRegion = process.env.AWS_BUCKET_REGION
+const awsAccessKey = process.env.AWS_ACCESS_KEY_ID
+const awsSecretKey = process.env.AWS_SECRET_ACCESS_KEY
 
 
 
@@ -22,9 +20,9 @@ const s3 = new S3({
 function uploadFile(file) {
     const fileStream = fs.createReadStream(file.path)
     const uploadParams = {
-        bucket: awsBucketName,
-        body: fileStream,
-        key: file.filename
+        Bucket: awsBucketName,
+        Body: fileStream,
+        Key: file.filename
     }
 
     return s3.upload(uploadParams).promise()
