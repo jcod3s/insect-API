@@ -52,14 +52,15 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             })
         })
 
-        //submits new insect data to DB -working original
-        // app.post('/api/submitInsectData',(req,res)=> {
-        //     insectDataCollection.insertOne(req.body)
-        //     .then(result => {
-        //         res.redirect('/')
-        //     })
-        //     .catch(error => console.error(error))
-        // })
+        app.get('/submitInsectData/:key', (req, res) => {
+            const key = req.params.key
+
+        })
+
+        // submits new insect data to DB -working original
+        app.post('/api/submitInsectData',(req,res)=> {
+            
+        })
 
         //uploads new insect data to server
         app.post('/api/submitInsectData', upload.none(), function (req, res, next) {
@@ -72,15 +73,27 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
           })
 
         //uploads images to db
-        app.post('/api/submitInsectImg', upload.single('insectImg'), async function (req, res, next) {
-            // create a variable to store the uploaded file
+        app.post('/api/submitNewInsect', upload.single('insectImg'), async function (req, res, next) {
+            //create a variable to store auto-generated filename from multer
             const file = req.file;
-            const fileName = file.filename;
-            const path = file.path;
             
+            //upload image to s3 and save the response object as a constant
             const result = await uploadFile(file)
-            res.send({imgPath: `searchInsect/${result.Key}`})
 
+            //send insect data to mongodb using the file and result object to newly created image data
+            insectDataCollection.insertOne({ 
+                commonName: req.body.commonName,
+                sciName: req.body.sciName,
+                order: req.body.order,
+                lifeSpan: req.body.lifeSpan,
+                description: req.body.description,
+                imgName: file.filename,
+                imgPath: `/insectimages/${result.Key}`
+            })
+            .then(result => {
+                res.redirect('/')
+            })
+            .catch(error => console.error(error))
         })
 
         app.listen(process.env.PORT || PORT, (req,res)=> {

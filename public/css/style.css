@@ -381,3 +381,8 @@
   .insectData span, p {
     display:block;
   }
+
+  /* Styles */
+  .hidden {
+    display: none
+  }

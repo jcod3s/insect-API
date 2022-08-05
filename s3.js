@@ -30,3 +30,12 @@ function uploadFile(file) {
 exports.uploadFile = uploadFile
 
 //downloads a photo from s3
+function getImg(fileKey) {
+   const downloadParams = {
+    Key: fileKey,
+    Bucket: bucketName
+   }
+
+   return s3.getObject(downloadParams).createReadStream()
+}
+exports.getImg = getImg
