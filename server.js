@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
@@ -6,12 +7,16 @@ const cors = require('cors')
 const env = require('dotenv').config()
 const PORT = 8000;
 
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+
 const multer  = require('multer');
-const { response } = require('express');
+//const { response } = require('express');
 const storage = multer.memoryStorage()
 const upload = multer({ dest: 'uploads/' })
 
-const { uploadFile } = require('./s3')
+const { uploadFile, getImg } = require('./s3')
 
 app.use(express.static('public'))
 
@@ -52,25 +57,14 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             })
         })
 
-        app.get('/submitInsectData/:key', (req, res) => {
+        //uses the imported getImg function from s3.js and the key provided in the image tag to download the img from s3
+        app.get('/insectimages/:key', (req, res) => {
+            console.log(req.params)
             const key = req.params.key
+            const readStream = getImg(key)
 
+            readStream.pipe(res)
         })
-
-        // submits new insect data to DB -working original
-        app.post('/api/submitInsectData',(req,res)=> {
-            
-        })
-
-        //uploads new insect data to server
-        app.post('/api/submitInsectData', upload.none(), function (req, res, next) {
-            // req.body contains the text fields
-            const commonName = req.body.commonName;
-            const sciName = req.body.sciName;
-            const order = req.body.order;
-            const lifeSpan = req.body.lifeSpan;
-            const description = req.body.description;
-          })
 
         //uploads images to db
         app.post('/api/submitNewInsect', upload.single('insectImg'), async function (req, res, next) {
@@ -79,6 +73,7 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             
             //upload image to s3 and save the response object as a constant
             const result = await uploadFile(file)
+            await unlinkFile(file.path)
 
             //send insect data to mongodb using the file and result object to newly created image data
             insectDataCollection.insertOne({ 

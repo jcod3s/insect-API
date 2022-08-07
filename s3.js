@@ -7,9 +7,6 @@ const awsBucketRegion = process.env.AWS_BUCKET_REGION
 const awsAccessKey = process.env.AWS_ACCESS_KEY_ID
 const awsSecretKey = process.env.AWS_SECRET_ACCESS_KEY
 
-
-
-
 const s3 = new S3({
     awsBucketRegion,
     awsAccessKey,
@@ -33,7 +30,7 @@ exports.uploadFile = uploadFile
 function getImg(fileKey) {
    const downloadParams = {
     Key: fileKey,
-    Bucket: bucketName
+    Bucket: awsBucketName
    }
 
    return s3.getObject(downloadParams).createReadStream()
