@@ -38,8 +38,7 @@
                     <% for(var i = 0; i < insects.length; i++) {%>
                         <div class="insect">
 							<div class="insectImgs">
-								<img class="smImgContainer" src="http://localhost:8000/temp-images/gh1.jpg" alt="insectImg">
-								<img class="smImgContainer" src="http://localhost:8000/temp-images/gh2.jpg" alt="insectImg">
+								<img class="smImgContainer" src="<%= insects[i].imgPath %>" alt="insectImg">
 								<!-- will ebentually hold a corosel of imsect images -->
 							</div>
                             <div class="insectData">
@@ -56,16 +55,20 @@
 
 		<section class="container">
 			<h2>Add New Insect</h2>
-			<form id="insectInfo" action="/api/submitInsectData" method="POST">
+			<form id="newInsect" action="/api/submitNewInsect" enctype="multipart/form-data" name="insectImages" method="POST">
+				<input id="insectImg" type="file" name="insectImg">
+				<input id="imgName" class="hidden" type="text" placeholder="Description" name="imgName">
+				<input id="imgPath" class="hidden" type="text" placeholder="Description" name="imgPath">
 				<input id="commonName" type="text" placeholder="Common Name" name="commonName">
 				<input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
 				<input id="order" type="text" placeholder="Order" name="order">
 				<input id="lifeSpan" type="text" placeholder="Approx. Life Span" name="lifeSpan">
 				<input id="description" type="text" placeholder="Description" name="description">
-				<button id="submitInsectData" type="submit">Submit</button>
+				
+				<button id="submitInsectData" type="submit">Add Insect</button>
 			</form>
 		</section>
 		
-		<script type="text/javascript" src="/js/main.js"></script>
+		<script type="module" src="/js/main.js"></script>
 	</body>
 </html>

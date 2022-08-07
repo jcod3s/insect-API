@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
@@ -6,13 +7,24 @@ const cors = require('cors')
 const env = require('dotenv').config()
 const PORT = 8000;
 
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+
+const multer  = require('multer');
+//const { response } = require('express');
+const storage = multer.memoryStorage()
+const upload = multer({ dest: 'uploads/' })
+
+const { uploadFile, getImg } = require('./s3')
+
 app.use(express.static('public'))
 
 app.use(cors())
 
 //Mongo Declarations
 const MongoClient = require('mongodb').MongoClient
-const connectionString  = 'mongodb+srv://pdiddy:sdiddyCombs@insectcluster.hx7ipsq.mongodb.net/?retryWrites=true&w=majority'
+const connectionString  = process.env.DB_STRING
 MongoClient.connect(connectionString,{ useUnifiedTopology: true })
     .then(client => {
         console.log('connected to database')
@@ -45,18 +57,38 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
             })
         })
 
-        //submits new insect data to DB
-        app.post('/api/submitInsectData',(req,res)=> {
-            insectDataCollection.insertOne(req.body)
+        //uses the imported getImg function from s3.js and the key provided in the image tag to download the img from s3
+        app.get('/insectimages/:key', (req, res) => {
+            console.log(req.params)
+            const key = req.params.key
+            const readStream = getImg(key)
+
+            readStream.pipe(res)
+        })
+
+        //uploads images to db
+        app.post('/api/submitNewInsect', upload.single('insectImg'), async function (req, res, next) {
+            //create a variable to store auto-generated filename from multer
+            const file = req.file;
+            
+            //upload image to s3 and save the response object as a constant
+            const result = await uploadFile(file)
+            await unlinkFile(file.path)
+
+            //send insect data to mongodb using the file and result object to newly created image data
+            insectDataCollection.insertOne({ 
+                commonName: req.body.commonName,
+                sciName: req.body.sciName,
+                order: req.body.order,
+                lifeSpan: req.body.lifeSpan,
+                description: req.body.description,
+                imgName: file.filename,
+                imgPath: `/insectimages/${result.Key}`
+            })
             .then(result => {
                 res.redirect('/')
             })
             .catch(error => console.error(error))
-        })
-
-        //uploads images to db
-        app.post('/api/submitInsectImg',(req,res)=> {
-            res.send('img uploaded')
         })
 
         app.listen(process.env.PORT || PORT, (req,res)=> {
