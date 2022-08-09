@@ -9,8 +9,8 @@
 		<title>Insect API</title>
 
 		<!-- external CSS link -->
+		<link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="/css/style.css">
-		<link rel="shortcut icon" href="#">
 	</head>
 	<main>
 	</main>
@@ -36,7 +36,7 @@
                 <section class="insects">
                     <!-- Loop through quotes -->
                     <% for(var i = 0; i < insects.length; i++) {%>
-                        <div class="insect">
+                        <div class="insect mediaBubble">
 							<div class="insectImgs">
 								<img class="smImgContainer" src="<%= insects[i].imgPath %>" alt="insectImg">
 								<!-- will ebentually hold a corosel of imsect images -->
