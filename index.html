@@ -23,10 +23,9 @@
 		</header>
 		
 		<section class="container">
-			<h2>Search Insect DB</h2>
-			<form id="performSearch" action="/api/searchInsect" method="GET">
+			<form id="search" action="/api/searchInsect" method="GET">
 				<input type="text" id="insectName" name="insectName" value="">
-				<button>Get Data</button>
+				<i class="fa-light fa-magnifying-glass"></i>
 			</form>
 		</section>
 		
@@ -54,7 +53,7 @@
                 </section>
 		</section>
 
-		<section class="container">
+		<section class="container forms">
 			<h2>Add New Insect</h2>
 			<form id="insectImages" action="/api/submitInsectImages" enctype="multipart/form-data" method="POST">
 				<input id="image" type="file" name="uploadedFiles">
