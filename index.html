@@ -10,7 +10,6 @@
 
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="/css/style.css">
-		<link rel="shortcut icon" href="#">
 	</head>
 	<main>
 	</main>
@@ -24,14 +23,12 @@
 		
 		<section class="container">
 			<form id="search" action="/api/searchInsect" method="GET">
-				<input type="text" id="insectName" name="insectName" value="">
-				<i class="fa-light fa-magnifying-glass"></i>
+				<input type="searchBar" name="searchBar" value="">
+				<button>Search</button>
 			</form>
 		</section>
 		
 		<section id="description" class="container">
-            <h2> Insects </h2>
-
                 <section class="insects">
                     <!-- Loop through quotes -->
                     <% for(var i = 0; i < insects.length; i++) {%>
