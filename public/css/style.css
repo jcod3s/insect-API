@@ -42,10 +42,13 @@
 
 /* || Sitewide Styles */
 /* Buttons */
+
 /* Icons (search, github, twitter, etc) */
 
 /* || Specific Site styles */
-
+.newInsect input {
+  width: 100%;
+}
 
 
 

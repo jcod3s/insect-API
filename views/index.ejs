@@ -11,6 +11,7 @@
 		<!-- external CSS link -->
 		<link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="/css/style.css">
+		<script src="https://kit.fontawesome.com/3e1f242c69.js" crossorigin="anonymous"></script>
 	</head>
 	<main>
 	</main>
@@ -18,21 +19,18 @@
 	<body>
 		<header class="container">
 			<a href="/">
-				<h1>Caribbean Insect DataBase</h1>	
+				<h1 class="fa-solid fa-bug"> insect DB</h1>
 			</a>
 		</header>
 	
         <section class="container">
-			<h2>Search Insect DB</h2>
-			<form id="performSearch" action="/api/searchInsect" method="GET">
+			<form action="/api/searchInsect" method="GET">
 				<input type="text" id="insectName" name="insectName" value="">
-				<button>Get Data</button>
+				<button class="fa-solid fa-magnifying-glass"></button>
 			</form>
 		</section>
 		
 		<section id="description" class="container">
-            <h2> Insects </h2>
-
                 <section class="insects">
                     <!-- Loop through quotes -->
                     <% for(var i = 0; i < insects.length; i++) {%>
@@ -54,7 +52,7 @@
 		</section>
 
 		<section class="container">
-			<h2>Add New Insect</h2>
+			<h2>Add Insect</h2>
 			<form id="newInsect" action="/api/submitNewInsect" enctype="multipart/form-data" name="insectImages" method="POST">
 				<input id="insectImg" type="file" name="insectImg">
 				<input id="imgName" class="hidden" type="text" placeholder="Description" name="imgName">
@@ -65,7 +63,7 @@
 				<input id="lifeSpan" type="text" placeholder="Approx. Life Span" name="lifeSpan">
 				<input id="description" type="text" placeholder="Description" name="description">
 				
-				<button id="submitInsectData" type="submit">Add Insect</button>
+				<button id="submitInsectData" type="submit">Add</button>
 			</form>
 		</section>
 		
