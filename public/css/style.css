@@ -15,7 +15,7 @@
 
  h2 {
   font-size: 1.25em;
-  margin: 0 auto;
+  margin: 0.5em auto;
  }
 
 /* || Utilities */
@@ -28,12 +28,16 @@
   -webkit-box-shadow: 2px 2px 3px -1px rgba(115,115,115,1);
   -moz-box-shadow: 2px 2px 3px -1px rgba(115,115,115,1);
   box-shadow: 2px 2px 3px -1px rgba(115,115,115,1);
-  margin: 2em auto;
+  margin: 1em auto;
 }
 
 .insect div {
   width: 100%;
   text-align: left;
+}
+
+.insect span {
+  display: block;
 }
 
 .insect .insectData {
@@ -46,11 +50,14 @@
 /* Icons (search, github, twitter, etc) */
 
 /* || Specific Site styles */
-.newInsect input {
-  width: 100%;
+#addInsect {
+  margin-top: 0;
 }
 
-
+#addInsect input {
+  width: 80%;
+  margin: 0.1em;
+}
 
 /* Containers */
   .container {
