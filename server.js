@@ -16,7 +16,10 @@ const multer  = require('multer');
 const storage = multer.memoryStorage()
 const upload = multer({ dest: 'uploads/' })
 
-const { uploadFile, getImg } = require('./s3')
+const { uploadFile, getImg } = require('./s3');
+const { request } = require('http');
+const { ConnectionCheckOutFailedEvent } = require('mongodb');
+const { response } = require('express');
 
 app.use(express.static('public'))
 
@@ -89,6 +92,17 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
                 res.redirect('/')
             })
             .catch(error => console.error(error))
+        })
+
+        app.delete('/api/deleteItem', (request, response) => {
+            insectDataCollection.deleteOne({commonName: request.body.itemFromJS})
+            .then(result => {
+                console.log('Todo Deleted')
+                response.json('Todo Deleted')
+                res.redirect('/')
+            })
+            .catch(error => console.error(error))
+        
         })
 
         app.listen(process.env.PORT || PORT, (req,res)=> {
