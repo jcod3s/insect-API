@@ -5,13 +5,14 @@ Array.from(deleteButton).forEach(element => {
 })
 
 async function deleteItem(){
-    const insectName = this.parentNode.childNodes[4].innerText.split(' ')[1]
+    const insectId = this.parentNode.dataset.id
+    console.log(insectId)
     try{
-        const response = await fetch('deleteItem', {
+        const response = await fetch('/api/deleteItem', {
             method: 'delete',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-              'itemFromJS': insectName
+              'idFromJSFile': insectId
             })
           })
         const data = await response.json()

@@ -95,14 +95,12 @@ MongoClient.connect(connectionString,{ useUnifiedTopology: true })
         })
 
         app.delete('/api/deleteItem', (request, response) => {
-            insectDataCollection.deleteOne({commonName: request.body.itemFromJS})
+            insectDataCollection.findOneAndDelete({_id: request.body.idFromJSFile})
             .then(result => {
                 console.log('Todo Deleted')
-                response.json('Todo Deleted')
-                res.redirect('/')
+                response.json('Todo deleted')
             })
             .catch(error => console.error(error))
-        
         })
 
         app.listen(process.env.PORT || PORT, (req,res)=> {

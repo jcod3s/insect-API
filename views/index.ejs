@@ -32,22 +32,22 @@
                 <section class="insects">
                     <!-- Loop through quotes -->
                     <% for(var i = 0; i < insects.length; i++) {%>
-                        <div class="insect mediaBubble">
+                        <div class="insect mediaBubble" data-id='<%= insects[i]._id%>'>
 							<div class="insectImgs">
 								
 								<img class="smImgContainer" src="<%= insects[i].imgPath %>" alt="insectImg">
 								<!-- will ebentually hold a corosel of imsect images -->
 							</div>
                             <div class="insectData">
-								<i class="fa-regular fa-heart"></i>
-								<i class="fa-regular fa-pen-to-square"></i>
-								<i class="fa-regular fa-trash-can"></i>
 								<span class="insectName"><%= 'Name: ' + insects[i].commonName %></span>
 								<span><%= 'Sci. Name: '+ insects[i].sciName %></span>
 								<span class="hidden"><%= 'Order: ' + insects[i].order %></span>
-								<span class="hideen"><%= 'Lifespan: ' + insects[i].lifeSpan %></span>
+								<span class="hidden"><%= 'Lifespan: ' + insects[i].lifeSpan %></span>
 								<span class="hidden"><%= 'Description: ' + insects[i].description %></span>
 							</div>
+							<i class="fa-regular fa-heart"></i>
+							<i class="fa-regular fa-pen-to-square"></i>
+							<i class="fa-regular fa-trash-can"></i>
                         </div>
                     <% } %>
                 </section>
