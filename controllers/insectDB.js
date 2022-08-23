@@ -1,6 +1,11 @@
 const InsectDB = require('../models/InsectDB')
 const InsectImgs = require('../models/InsectImgs')
 
+//file system definitons
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+
 module.exports = {
     getInsects: async (req,res)=>{
         //console.log(req.user) no user data yet, so commented out for now
@@ -15,6 +20,13 @@ module.exports = {
     },
     createInsect: async (req, res)=>{
         try{
+            //create a variable to store auto-generated filename from multer
+            const file = req.file;
+            
+            //upload image to s3 and save the response object as a constant
+            const result = await uploadFile(file)
+            await unlinkFile(file.path)
+
             await InsecDB.create({ 
                 commonName: req.body.commonName,
                 sciName: req.body.sciName,

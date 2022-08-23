@@ -5,7 +5,7 @@ const insectDBController = require('../controllers/insectDB')
 
 router.get('/', insectDBController.getInsects) //removed "ensureAuth," until it gets activated
 
-router.post('/createInsect', insectDBController.createInsect)
+router.post('/createInsect', upload.single('insectImg'), insectDBController.createInsect)
 
 router.put('/editInsect', insectDBController.editInsect)
 
