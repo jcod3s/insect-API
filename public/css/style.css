@@ -20,6 +20,28 @@
 
 /* || Utilities */
 /* classes like mediabubbles,  */
+body>section {
+  width: 100%;
+}
+
+@media screen and (min-width: 400px) {
+  body>section {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  body>section {
+    width: 85%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body>section {
+    width: 75%;
+  }
+}
+
 .mediaBubble {
   width: 100%;
   display: flex;

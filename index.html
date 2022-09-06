@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="A simple API that returns insect data based on search parameters">
+    	<meta name="keywords" content="insects, API, insect database, dominican republic insects, dominican spiders">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+		<title>Insect API</title>
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="/css/normalize.css">
+		<link rel="stylesheet" href="/css/style.css">
+		<script src="https://kit.fontawesome.com/3e1f242c69.js" crossorigin="anonymous"></script>
+	</head>
+	
+	<body>
+		<header class="container">
+			<a href="/">
+				<h1 class="fa-solid fa-bug"> insect DB</h1>
+			</a>
+		</header>
+	
+        <section class="container">
+			<form action="/api/searchInsect" method="GET">
+				<input type="text" id="insectName" name="insectName" value="">
+				<button class="fa-solid fa-magnifying-glass"></button>
+			</form>
+		</section>
+		
+		<section id="description" class="container">
+                <section class="insects">
+                    <!-- Loop through quotes -->
+                    <% for(var i = 0; i < insects.length; i++) {%>
+                        <div class="insect mediaBubble">
+							<div class="insectImgs">
+								
+								<img class="smImgContainer" src="<%= insects[i].imgPath %>" alt="insectImg">
+								<!-- will ebentually hold a corosel of imsect images -->
+							</div>
+                            <div class="insectData">
+								<i class="fa-regular fa-heart"></i>
+								<i class="fa-regular fa-pen-to-square"></i>
+								<i class="fa-regular fa-trash-can"></i>
+								<span><%= 'Name: ' + insects[i].commonName %></span>
+								<span><%= 'Sci. Name: '+ insects[i].sciName %></span>
+								<span class="hidden"><%= 'Order: ' + insects[i].order %></span>
+								<span class="hideen"><%= 'Lifespan: ' + insects[i].lifeSpan %></span>
+								<span class="hidden"><%= 'Description: ' + insects[i].description %></span>
+							</div>
+                        </div>
+                    <% } %>
+                </section>
+		</section>
+
+		<section id="addInsect" class="container">
+			<h2>Add Insect</h2>
+			<form id="newInsect" action="/api/submitNewInsect" enctype="multipart/form-data" name="insectImages" method="POST">
+				<input id="insectImg" type="file" name="insectImg">
+				<input id="imgName" class="hidden" type="text" placeholder="Description" name="imgName">
+				<input id="imgPath" class="hidden" type="text" placeholder="Description" name="imgPath">
+				<input id="commonName" type="text" placeholder="Name" name="commonName">
+				<input id="sciName" type="text" placeholder="Scientific Name" name="sciName">
+				<input id="order" type="text" placeholder="Order" name="order">
+				<input id="lifeSpan" type="text" placeholder="Life Span" name="lifeSpan">
+				<input id="description" type="text" placeholder="Description" name="description">
+				
+				<button id="submitInsectData" type="submit">Add</button>
+			</form>
+		</section>
+		
+		<script type="module" src="/js/main.js"></script>
+	</body>
+</html>
