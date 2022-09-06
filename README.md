@@ -3,7 +3,7 @@ This easy to use API lets users learn about isects from different regions by all
 
 **Link to project:** insect-api.herokuapp.com//
 
-![alt tag](http://placecorgi.com/1200/650)
+![alt tag](https://github.com/jcod3s/insect-API/blob/main/insectAPIVid.gif)
 
 ## How It's Made:
 
