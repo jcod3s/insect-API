@@ -1,6 +1,9 @@
 /* || Common Styles */
 /* link styling, headers, etc.
  */
+ html {
+  font-family: brada-sans
+ }
  body {
   display: flex;
   flex-direction: column;
