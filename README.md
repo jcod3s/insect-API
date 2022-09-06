@@ -12,7 +12,6 @@ This easy to use API lets users learn about isects from different regions by all
 This API is built using Node.js, and Express. Multer was used as the middleware to randomly name the image files upon being uploaded to the server. The text data is stored using MongoDB, and the image files are stored using AWS S3. Enjoy!
 
 ## Optimizations
-*(optional)*
 
 Performance:
 - Resize uploads for uniform image sizing:
