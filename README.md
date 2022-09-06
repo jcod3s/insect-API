@@ -1,7 +1,7 @@
-# My Awesome Project
-Write a short sentence or two about this project and what it does. Be sure to include a link and a screenshot (we're front end devs so we can actually see our work!).
+# Insect API
+This easy to use API lets users learn about isects from different regions by allowing them to browse community uploaded insect images and basic data.
 
-**Link to project:** http://recruiters-love-seeing-live-demos.com/
+**Link to project:** insect-api.herokuapp.com//
 
 ![alt tag](http://placecorgi.com/1200/650)
 
@@ -9,24 +9,36 @@ Write a short sentence or two about this project and what it does. Be sure to in
 
 **Tech used:** HTML, CSS, JavaScript, Framework of choice
 
-Here's where you can go to town on how you actually built this thing. Write as much as you can here, it's totally fine if it's not too much just make sure you write *something*. If you don't have too much experience on your resume working on the front end that's totally fine. This is where you can really show off your passion and make up for that ten fold.
+This API is built using Node.js, and Express. Multer was used as the middleware to randomly name the image files upon being uploaded to the server. The text data is stored using MongoDB, and the image files are stored using AWS S3. Enjoy!
 
 ## Optimizations
 *(optional)*
 
-You don't have to include this section but interviewers *love* that you can not only deliver a final product that looks great but also functions efficiently. Did you write something then refactor it later and the result was 5x faster than the original implementation? Did you cache your assets? Things that you write in this section are **GREAT** to bring up in interviews and you can use this section as reference when studying for technical interviews!
+Performance:
+- Resize uploads for uniform image sizing:
+Image load times vary be file size, so resizing upon upload would provide a more streamlined experience by making image loading faster, and more uniform.
+
+Infrastructure:
+- Change to MVC structure:
+The app currently uses a flat file structure, but this would quickly get harder to navigate once more features are eventually added. MVC would provide a more robust structure that would scale once fetures like authentication are added.
+
+Security:
+Authentication: For the sake of throttling requests and and being able to identify users and sessions, authentication will be necessary.
 
 ## Lessons Learned:
 
-No matter what your experience level, being an engineer means continuously learning. Every time you build something you always have those *whoa this is awesome* or *fuck yeah I did it!* moments. This is where you should share those moments! Recruiters and interviewers love to see that you're self-aware and passionate about growing.
+- This was my first exposure to AWS products and services. I found their documentation to be a bit unclear at times, but as always, it was nothing a little experimentation couldn't solve.
 
-## Examples:
-Take a look at these couple examples that I have in my own portfolio:
+Some take-aways:
 
-**Palettable:** https://github.com/alecortega/palettable
+1) Be EXACT in naming your environmental vaiables when using amazon web services. I initially thought I could name me vcariables and declare them on my AWS account - not so. They want you to name your environment variables:
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_DEFAULT_REGION
 
-**Twitter Battle:** https://github.com/alecortega/twitter-battle
+2) Multer conviniently (randomly) names uploaded files, saving you the trouble of having to come up with a naming algorithm if you have no explicit NEED for a naming convention
 
-**Patch Panel:** https://github.com/alecortega/patch-panel
+
+
 
 
