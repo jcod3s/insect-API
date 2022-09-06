@@ -6,6 +6,7 @@
   flex-direction: column;
   overflow-x: none;
   text-align: center;
+  justify-content: center;
  }
 
  h1 {
